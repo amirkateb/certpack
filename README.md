@@ -159,3 +159,5 @@ bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cer
 ---
 
 ## 📄 Lic
+
+MIT
