@@ -1,23 +1,24 @@
-# SSL Certificate Auto Generator Script
+# CertPack
 
-A simple interactive bash script to generate Let's Encrypt SSL certificates and package them for easy deployment (including Patchim platform compatibility).
+Interactive SSL certificate generator using Let's Encrypt (Certbot) with automatic packaging for deployment (Patchim & standard formats).
 
 ---
 
 ## 🚀 One-line Install & Run
 
-bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh)
+bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
 
 ---
 
 ## 📌 Features
 
-- Interactive input (domain, email, extra domains)
-- Supports multiple domains (SAN)
+- Interactive CLI (domain, email, multi-domain)
+- Supports HTTP challenge (automatic)
+- Supports DNS challenge (manual, wildcard ready)
 - Patchim-compatible output (server.crt + server.key)
-- Normal mode (fullchain.pem, privkey.pem, etc.)
+- Standard output (fullchain.pem, privkey.pem, etc.)
 - Automatic ZIP packaging
-- Minimal and clean setup
+- Clean and minimal design
 
 ---
 
@@ -25,62 +26,111 @@ bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cer
 
 - Ubuntu / Debian server
 - Root access
-- Nginx installed and running
-- Port 80 open
-- Domain DNS pointing to your server
+- Nginx (for HTTP mode)
+- Port 80 open (for HTTP mode)
+- Domain DNS pointed to server
 
 ---
 
 ## ⚙️ Usage Guide (English)
 
-1. Run the script:
-   bash    bash <(curl -s bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh)    
+### 1. Run script
 
-2. Enter:
-   - Main domain
-   - Email
-   - Additional domains (optional)
-   - Mode (Patchim or Normal)
+bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
 
-3. After completion, a ZIP file will be created in:
-      /root/cert-output/   
+---
+
+### 2. Provide inputs
+
+- Main domain
+- Email
+- Additional domains (optional)
+- Challenge type:
+  - HTTP (automatic via Nginx)
+  - DNS (manual TXT record, supports wildcard)
+- Output mode:
+  - Patchim
+  - Normal
+
+---
+
+### 3. Output location
+
+bash /root/cert-output/ 
+
+ZIP files:
+- cert-patchim.zip
+- cert-normal.zip
+
+---
+
+## 🌐 Challenge Types
+
+### 🔹 HTTP Challenge (Automatic)
+
+- Uses Nginx
+- Requires port 80
+- Fully automatic
+
+---
+
+### 🔹 DNS Challenge (Manual)
+
+- Supports wildcard (*.domain.com)
+- Certbot will show a TXT record like:
+
+_acme-challenge.example.com TXT "TOKEN"
+
+#### Steps:
+
+1. Go to your DNS provider (Cloudflare, etc)
+2. Add TXT record
+3. Wait for propagation
+4. Press Enter in terminal
 
 ---
 
 ## 📦 Deployment
 
-### Patchim Mode
+### 🔸 Patchim Mode
 
-1. Extract the ZIP file:
-   bash    unzip cert-patchim.zip    
+1. Extract ZIP:
+
+bash unzip cert-patchim.zip 
 
 2. Move files to:
-      /etc/nginx/ssl   
 
-3. Replace existing files with:
-   - server.crt
-   - server.key
+/etc/nginx/ssl
+
+3. Replace:
+
+- server.crt
+- server.key
 
 4. Restart Nginx:
-   bash    systemctl restart nginx    
+
+bash systemctl restart nginx 
 
 ---
 
-### Normal Mode
+### 🔸 Normal Mode
 
 1. Extract ZIP:
-   bash    unzip cert-normal.zip    
 
-2. Use files as needed:
-   - fullchain.pem
-   - privkey.pem
-   - cert.pem
-   - chain.pem
+bash unzip cert-normal.zip 
 
-3. Replace your existing SSL config files
+2. Files included:
+
+- fullchain.pem
+- privkey.pem
+- cert.pem
+- chain.pem
+
+3. Replace in your SSL config paths
 
 4. Restart Nginx:
-   bash    systemctl restart nginx    
+
+bash systemctl restart nginx 
 
 ---
 
@@ -88,76 +138,92 @@ bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cer
 
 ### اجرا
 
-با یک دستور اسکریپت را اجرا کنید:
-
-bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
+bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
 
 ---
 
 ### مراحل
 
-بعد از اجرا، از شما سوال می‌شود:
+پس از اجرا:
 
-- دامنه اصلی
-- ایمیل
-- دامنه‌های اضافی (در صورت وجود)
-- نوع خروجی (پچیم یا نرمال)
-
----
-
-### محل خروجی
-
-فایل زیپ در مسیر زیر ساخته می‌شود:
-
-/root/cert-output/
+- دامنه اصلی را وارد کنید
+- ایمیل را وارد کنید
+- در صورت وجود، دامنه‌های اضافی را وارد کنید
+- نوع چالش را انتخاب کنید:
+  - HTTP (اتوماتیک)
+  - DNS (دستی، مناسب wildcard)
+- نوع خروجی را انتخاب کنید:
+  - پچیم
+  - نرمال
 
 ---
 
-## 📦 نحوه استفاده از خروجی
+### 📍 محل خروجی
 
-### حالت پچیم
-
-1. فایل زیپ را استخراج کنید:
-   bash    unzip cert-patchim.zip    
-
-2. فایل‌ها را در مسیر زیر قرار دهید:
-      /etc/nginx/ssl   
-
-3. فایل‌های قبلی را با این‌ها جایگزین کنید:
-   - server.crt
-   - server.key
-
-4. سپس nginx را ریستارت کنید:
-   bash    systemctl restart nginx    
+bash /root/cert-output/ 
 
 ---
 
-### حالت نرمال
+## 📦 استفاده از خروجی
 
-1. فایل زیپ را استخراج کنید:
-   bash    unzip cert-normal.zip    
+### 🔸 حالت پچیم
 
-2. فایل‌ها شامل:
-   - fullchain.pem
-   - privkey.pem
-   - cert.pem
-   - chain.pem
+1. استخراج:
 
-3. در مسیرهای مورد نظر خود جایگزین کنید
+bash unzip cert-patchim.zip 
 
-4. در نهایت nginx را ریستارت کنید:
-   bash    systemctl restart nginx    
+2. انتقال به:
+
+/etc/nginx/ssl
+
+3. جایگزینی فایل‌ها:
+
+- server.crt
+- server.key
+
+4. ریستارت nginx:
+
+bash systemctl restart nginx 
+
+---
+
+### 🔸 حالت نرمال
+
+1. استخراج:
+
+bash unzip cert-normal.zip 
+
+2. فایل‌ها:
+
+- fullchain.pem
+- privkey.pem
+- cert.pem
+- chain.pem
+
+3. جایگزینی در مسیرهای SSL
+
+4. ریستارت nginx:
+
+bash systemctl restart nginx 
 
 ---
 
 ## ⚠️ Notes
 
-- DNS دامنه باید به سرور اشاره کند
-- پورت 80 باید باز باشد
-- اگر خطا گرفتید، nginx config را بررسی کنید
+- DNS باید به سرور اشاره کند
+- در حالت HTTP، پورت 80 باید باز باشد
+- در حالت DNS، propagation ممکن است چند دقیقه زمان ببرد
+- اگر خطا داشتید، nginx config را بررسی کنید
 
 ---
 
-## 📄 Lic
+## 📄 License (MIT)
 
-MIT
+```text
+MIT License
+
+Copyright (c) 2026 amirkateb
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction.
