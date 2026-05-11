@@ -6,8 +6,9 @@ Interactive SSL certificate generator using Let's Encrypt (Certbot) with automat
 
 ## 🚀 One-line Install & Run
 
-bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
-
+```text
+ bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
+```
 ---
 
 ## 📌 Features
@@ -36,8 +37,9 @@ bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/ge
 
 ### 1. Run script
 
-bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
-
+```text
+ bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
+```
 ---
 
 ### 2. Provide inputs
@@ -56,8 +58,9 @@ bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/ge
 
 ### 3. Output location
 
-bash /root/cert-output/ 
-
+```text
+ /root/cert-output/ 
+```
 ZIP files:
 - cert-patchim.zip
 - cert-normal.zip
@@ -96,8 +99,9 @@ _acme-challenge.example.com TXT "TOKEN"
 
 1. Extract ZIP:
 
-bash unzip cert-patchim.zip 
-
+```text
+ unzip cert-patchim.zip 
+```
 2. Move files to:
 
 /etc/nginx/ssl
@@ -109,8 +113,9 @@ bash unzip cert-patchim.zip
 
 4. Restart Nginx:
 
-bash systemctl restart nginx 
-
+```text
+ systemctl restart nginx 
+```
 ---
 
 ### 🔸 Normal Mode
@@ -130,16 +135,18 @@ bash unzip cert-normal.zip
 
 4. Restart Nginx:
 
-bash systemctl restart nginx 
-
+```text
+ systemctl restart nginx 
+```
 ---
 
 ## 🧭 راهنمای استفاده (فارسی)
 
 ### اجرا
 
-bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
-
+```text
+ bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/get-cert.sh) 
+```
 ---
 
 ### مراحل
@@ -160,8 +167,9 @@ bash bash <(curl -s https://raw.githubusercontent.com/amirkateb/certpack/main/ge
 
 ### 📍 محل خروجی
 
-bash /root/cert-output/ 
-
+```text
+ /root/cert-output/ 
+```
 ---
 
 ## 📦 استفاده از خروجی
@@ -170,7 +178,9 @@ bash /root/cert-output/
 
 1. استخراج:
 
-bash unzip cert-patchim.zip 
+```text
+ unzip cert-patchim.zip
+```
 
 2. انتقال به:
 
@@ -183,16 +193,18 @@ bash unzip cert-patchim.zip
 
 4. ریستارت nginx:
 
-bash systemctl restart nginx 
-
+```text
+ systemctl restart nginx 
+```
 ---
 
 ### 🔸 حالت نرمال
 
 1. استخراج:
 
-bash unzip cert-normal.zip 
-
+```text
+ unzip cert-normal.zip 
+```
 2. فایل‌ها:
 
 - fullchain.pem
@@ -204,8 +216,9 @@ bash unzip cert-normal.zip
 
 4. ریستارت nginx:
 
-bash systemctl restart nginx 
-
+```text
+systemctl restart nginx 
+```
 ---
 
 ## ⚠️ Notes
